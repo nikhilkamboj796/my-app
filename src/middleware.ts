@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
-  const token = req.cookies.get("next-auth.session-token")?.value;
+  const isProduction = process.env.NODE_ENV === "production";
+
+  // ✅ Check both local and production cookies
+  const token = req.cookies.get(
+    isProduction
+      ? "__Secure-next-auth.session-token"
+      : "next-auth.session-token"
+  )?.value;
 
   const pathname = req.nextUrl.pathname;
 
