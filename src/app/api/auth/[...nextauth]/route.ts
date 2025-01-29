@@ -48,6 +48,7 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async jwt({ token, user, account }: { token: JWT; user?: User; account?: any }) {
       await connectDB();
 
